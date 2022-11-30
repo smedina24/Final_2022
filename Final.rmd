@@ -1,6 +1,6 @@
 ---
 title: "Covid91 vaccine study FinalFall2022"
-author: "Put your name here!"
+author: "Sarah Medina"
 output: 
   html_document:
     number_sections: true
@@ -18,6 +18,12 @@ FinalDat <-read.csv(file="finalFall2022.csv",header=TRUE)
 FinalData <- FinalDat  %>% select(-one_of("X"))
 FinalData <- FinalData %>%
 mutate(across(where(is.character), as.factor))
+FinalData$treatment <- relevel(FinalData$treatment,ref="placebo")
+#FinalData$infected <- relevel(FinalData$infected,ref="OK")
+M = filter(FinalData, sex =="M")
+F = filter(FinalData, sex =="F")
+gay = filter(FinalData, LGBTQ =="gay")
+Druguser = filter(FinalData, DrugUser =="yes")
 ```
 
 # Introduction
@@ -25,6 +31,39 @@ mutate(across(where(is.character), as.factor))
 A new  preventative vaccine (covid921) is under test in clinical trials. Given the nature of this vaccine it is suspected that the drug may exhibit different effectiveness across the variety of subpopulations tracked. Consider population subgroups by gender( guys and gals), drug use, and sexual orientation. Write a complete report that separately considers this drug for each subgroup and your recommendations as to whether people in the subgroup should take the vaccine. Structure your report in four sections each devoted to one of the four subgroups, use null and alternative hypothesis statements and correct statistical verbage when referencing p-values in conclusions.
 
 ## Males
+
+$H_0$ The vaccine has no effect on whether males will contract covid19
+
+$H_1$ The vaccine effects the likely-hood a Male will contact covid19 
+
+```{r}
+barchartGC(~infected + treatment,data=M, type="percent")
+
+```
+
+The plot shows that of the males that contracted covid 19 over 60 percent of them received the placebo and about 30 percent received the vaccine. Of the males that did not contact covid19 50 percent received the placebo and 50 percent received the vaccine. 
+
+### Numerical Summaries  
+
+```{r}
+table1 <- xtabs(~infected + treatment, data=M)
+rowPerc(table1)
+colPerc(table1)
+```
+ The numerical results indicate that of the males who were infected with covid19, 68 percent received the placebo and 31 percent received the vaccine. The numerical results demonstrate the vaccine is effective for the male community since a larger percent of the males that got covid19 had the placebo and not the vaccine. The males who received the placebo were twice as likely to get covid19 than the males who got the vaccine. 
+
+## Inferential  
+
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+```
+The inferential results show that the p value is 2.364e-12. The p value is extremely low so we are able to reject the null hypothesis. Thus, the males who received the vaccine were less likely to contract covid19.
+
+## Conclusion
+
+We reject the null hypothesis that the vaccine has no effect on whether a male will contact covid19. This is because the p value provided by the fisher's exact test was extremely low. Therefore, the probability of there being no difference between the males who received the placebo and the males who received the vaccine is extremely unlikely. The numerical results indicated that of the males who received the vaccine 31 percent got covid19 and 68 percent of the males who received the placebo got covid19. Thus, the males who received the placebo were twice as likely to get covid19. If you are a male you should get the vaccine.  
 
 
 ## Females
