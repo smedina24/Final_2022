@@ -186,7 +186,31 @@ gayfish
 ```
 The p value for the lGBTQ community is extremely low. The p value is at 0.00000001. Therefore, the likelihood that the gay people who took the vaccine and the gay people who took the placebo will ever contract covid19 at the same rate is extremely unlikely.  
 
+```{r}
+effect <- gayfish$p.value/(gayfish$p.value +1)
+effectivenessgay = gayfish$estimate/(gayfish$estimate +1)*100
+print(effectivenessgay)
+```
+
+```{r}
+low=(gayfish$conf.int[1]/(gayfish$conf.int[1] +1))*100
+hi=(gayfish$conf.int[2]/(gayfish$conf.int[2] +1))*100
+options(digits=2)
+```
+
+## Effectiveness Confidence Interval `r low`  to `r hi`
+
+
+Both the odds ratio of 14 and the effectiveness confidence interval of 6.2 to 25.61 are extremely low and indicate that the vaccine is not effective for the LGBTQ community. In fact, members of the LGBTQ community are 6 times more likely to get covid19 if they take the vaccine. 
+
+
+## Conclusion 
+
+We reject the null hypothesis that the vaccine has no effect on whether a member of the LGBTQ community will contract covid19 because the p value was extremely low at 0.00000001. Thus, indicating that the likelihood of the null hypothesis ever being true is not likely at all. The numerical, inferential, and graphical results all indicated that gay people were 6 times more likely to get covid19 if the took the vaccine. Therefore, the vaccine is not effective for the gay community. 
+
+
 ## Druggies
+
 
 
 # Overall Results and Conclusions
