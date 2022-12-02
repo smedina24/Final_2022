@@ -143,6 +143,9 @@ options(digits=2)
 
 ## Effectiveness Confidence Interval `r low`  to `r hi`
 
+The odds ratio and effectiveness confidence interval are low for females. The odds ratio for females is 43 and the effective confidence interval is under 50. Therefore, the vaccine is not effective in Females.
+
+
 
 ## LGBTQ
 
