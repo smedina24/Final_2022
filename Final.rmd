@@ -143,7 +143,11 @@ options(digits=2)
 
 ## Effectiveness Confidence Interval `r low`  to `r hi`
 
-The odds ratio and effectiveness confidence interval are low for females. The odds ratio for females is 43 and the effective confidence interval is under 50. Therefore, the vaccine is not effective in Females.
+The odds ratio and effectiveness confidence interval are low for females. The odds ratio for females is 43 and the effective confidence interval is under 50.The confidence interval is 37.34 to 47.86. Therefore, the vaccine is not effective in Females.
+
+## Conclusion
+
+We reject the null hypothesis that the vaccine has no effect on whether a female will contract covid19. The p value is very low. Therefore, the likelihood that females who take the placebo and the females who took the vaccine to contract covid 19 at the same rate is extremely unlikely. The effectiveness interval was also under 50 and indicated the vaccine is not effective for women. The numerical graphical and inferential results also showed that the females who took the vaccine were more likely to get covid19.
 
 
 
