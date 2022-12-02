@@ -43,7 +43,7 @@ barchartGC(~infected + treatment,data=M, type="percent")
 
 ```
 
-The plot shows that of the males that contracted covid 19 over 60 percent of them received the placebo and about 30 percent received the vaccine. Of the males that did not contact covid19 50 percent received the placebo and 50 percent received the vaccine. 
+The plot shows that of the males that contracted covid 19 over 60 percent of them received the placebo and about 30 percent received the vaccine. Of the males that did not contract covid19 50 percent received the placebo and 50 percent received the vaccine. 
 
 ### Numerical Summaries  
 
@@ -126,7 +126,7 @@ Femalesfish <- fisher.test(table1)
 Femalesfish
 ```
 
-The p value for females is extremely low. The p value is 0.005. Therefore, we are able to reject the null hypothesis. The vaccine does in fact effect the likelyhood of a feamle contracting covid19. Howerever, the graphical and numerical results show that females are more likely to contract covid19 if the take the vaccine.
+The p value for females is low. The p value is 0.005. Therefore, we are able to reject the null hypothesis. The vaccine does in fact effect the likelihood of a feamle contracting covid19. However, the graphical and numerical results show that females are more likely to contract covid19 if the take the vaccine.
 
 
 ```{r}
@@ -153,7 +153,38 @@ We reject the null hypothesis that the vaccine has no effect on whether a female
 
 ## LGBTQ
 
+$H_0$ The vaccine has no effect on whether members of the LGBTQ community will contract covid19
 
+$H_1$ The vaccine effects the likely-hood a member of the LGBTQ community will contact covid19
+
+## Graphical 
+
+```{r}
+barchartGC(~infected + treatment,data=gay, type="percent")
+
+```
+The graphical results show that of the gay people who were infected with covid 19 about 90 percent took the vaccine and about 10 percent took the placebo.
+
+
+### Numerical Summaries  
+
+```{r}
+table1 <- xtabs(~infected + treatment, data=gay)
+rowPerc(table1)
+colPerc(table1)
+```
+The numerical results indicate that of the gay people who were infected with covid19 87 percent took the vaccine and 13 percent took the placebo. The numerical results show a significant difference between those who took the vaccine and those that did not.
+
+### Inferential
+
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+gayfish <- fisher.test(table1)
+gayfish
+```
+The p value for the lGBTQ community is extremely low. The p value is at 0.00000001. Therefore, the likelihood that the gay people who took the vaccine and the gay people who took the placebo will ever contract covid19 at the same rate is extremely unlikely.  
 
 ## Druggies
 
