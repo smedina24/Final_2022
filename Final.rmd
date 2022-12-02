@@ -163,6 +163,7 @@ $H_1$ The vaccine effects the likely-hood a member of the LGBTQ community will c
 barchartGC(~infected + treatment,data=gay, type="percent")
 
 ```
+
 The graphical results show that of the gay people who were infected with covid 19 about 90 percent took the vaccine and about 10 percent took the placebo.
 
 
@@ -212,5 +213,65 @@ We reject the null hypothesis that the vaccine has no effect on whether a member
 ## Druggies
 
 
+$H_0$ The vaccine has no effect on whether drug users will contract covid19
+
+$H_1$ The vaccine effects the likely-hood a drug user will contact covid19
+
+## Graphical 
+
+```{r}
+barchartGC(~infected + treatment,data=Druguser, type="percent")
+
+```
+
+The graphical results indicate that of the drug users who got covid19 80 percent took the vaccine and 20 percent took the placebo.
+
+### Numerical Summaries  
+
+```{r}
+table1 <- xtabs(~infected + treatment, data=Druguser)
+rowPerc(table1)
+colPerc(table1)
+```
+
+The numerical results indicated that of the drug users that got covid19 83 had taken the vaccine and 17 had taken the placebo. Therefore, the drug users were more likely to get covid19 if they took the vaccine.
+
+### Inferential
+
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+Drugfish <- fisher.test(table1)
+Drugfish
+```
+The p value for the drug users is extremely low at 3e-07. Therefore, the likely hood that the vaccine does not affect the likelihood that a drug user will get covid19 is extremely low.
+
+```{r}
+effect <- Drugfish$p.value/(Drugfish$p.value +1)
+effectivenessDruguser = Drugfish$estimate/(Drugfish$estimate +1)*100
+print(effectivenessDruguser)
+```
+
+```{r}
+low=(Drugfish$conf.int[1]/(Drugfish$conf.int[1] +1))*100
+hi=(Drugfish$conf.int[2]/(Drugfish$conf.int[2] +1))*100
+options(digits=2)
+```
+
+## Effectiveness Confidence Interval `r low`  to `r hi`
+
+The odds ratio and effectiveness confidence level of Drug users are low. The odds ratio is 17 and the effectiveness confidence interval is 8.57 to 29.47. Since these are both low we can conclude the vaccine not effective for drug users.
+
+
+## Conclusion
+
+We reject the null hypothesis that the vaccine has no effect on the likely hood that a Drug user will contract covid19. This is because the p value was extremely low and indicates the likelihood that there is no statistical difference is very low. The drug users who took the vaccine were far more likely to get covid 19. Therefore the vaccine is not effective for Drug users.
+
 
 # Overall Results and Conclusions
+
+
+The vaccine was the most effective for the Males. The males had the highest effectiveness confidence interval at 63.4 to 73.35. The females followed with an effectiveness confidence interval of 37.34 to 47.86. The drug Users followed with an effectiveness confidence interval of 8.57 to 29.47. Lastly, the vaccine was the least effective for the gay community their effectiveness confidence interval was the lowest at 6.2 to 25.61. The vaccine was effective for those groups with an effectiveness confidence interval of 50 or more.
+
+If you are a male then you should take the vaccine it was effective in this population. The females, drug users, and gay people should not take the vaccine as it was not effective in these populations.
