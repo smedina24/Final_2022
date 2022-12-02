@@ -82,7 +82,7 @@ options(digits=2)
 
 ## Effectiveness Confidence Interval `r low`  to `r hi`
 
-The effectiveness for males must be above 50 percent in order for the vaccine to be effective. As we can see the effective confidence Interval is from 63.4 to 73.35. Therefore, the vaccine is effective in males.
+The effectiveness for males must be above 50 percent in order for the vaccine to be effective. As we can see the effective confidence Interval is from 63.4 to 73.35. Therefore, the vaccine is effective in males. Also the odds ratio for males is 69. The odds ratio indicates the effectiveness of the vaccine. Thus the vaccine is effective in males.
 
 
 ## Conclusion
@@ -96,6 +96,52 @@ $H_0$ The vaccine has no effect on whether Females will contract covid19
 
 $H_1$ The vaccine effects the likely-hood a Female will contact covid19
 
+## Graphical 
+
+```{r}
+barchartGC(~infected + treatment,data=F, type="percent")
+
+```
+
+The graphical results show that of the females who got covid19 about 60 percent had received the vaccine and about 40 percent received the placebo.
+
+
+### Numerical Summaries  
+
+```{r}
+table1 <- xtabs(~infected + treatment, data=F)
+rowPerc(table1)
+colPerc(table1)
+```
+
+The numerical results show that of the females that were infected with covid19 43 percent had taken the placebo and 57 percent had taken the vaccine. This suggest the vaccine may not be as effective for females as it was for males. It seems females are more likely to get covid19 if the take the vaccine. We will run a fisher exact test to confirm.
+
+### Inferential
+
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+Femalesfish <- fisher.test(table1)
+Femalesfish
+```
+
+The p value for females is extremely low. The p value is 0.005. Therefore, we are able to reject the null hypothesis. The vaccine does in fact effect the likelyhood of a feamle contracting covid19. Howerever, the graphical and numerical results show that females are more likely to contract covid19 if the take the vaccine.
+
+
+```{r}
+effect <- Femalesfish$p.value/(Femalesfish$p.value +1)
+effectivenessF = Femalesfish$estimate/(Femalesfish$estimate +1)*100
+print(effectivenessF)
+```
+
+```{r}
+low=(Femalesfish$conf.int[1]/(Femalesfish$conf.int[1] +1))*100
+hi=(Femalesfish$conf.int[2]/(Femalesfish$conf.int[2] +1))*100
+options(digits=2)
+```
+
+## Effectiveness Confidence Interval `r low`  to `r hi`
 
 
 ## LGBTQ
